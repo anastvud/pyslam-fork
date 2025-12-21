@@ -49,7 +49,7 @@ from pyslam.local_features.feature_tracker import (
 from pyslam.local_features.feature_tracker_configs import FeatureTrackerConfigs
 
 from pyslam.utilities.utils_sys import Printer
-
+from pyslam.utilities.utils_geom import rotmat2qvec
 
 kScriptPath = os.path.realpath(__file__)
 kScriptFolder = os.path.dirname(kScriptPath)
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # select your tracker configuration (see the file feature_tracker_configs.py)
     # LK_SHI_TOMASI, LK_FAST
     # SHI_TOMASI_ORB, FAST_ORB, ORB, BRISK, AKAZE, FAST_FREAK, SIFT, ROOT_SIFT, SURF, SUPERPOINT, LIGHTGLUE, XFEAT, XFEAT_XFEAT, LOFTR
-    tracker_config = FeatureTrackerConfigs.LK_SHI_TOMASI
+    tracker_config = FeatureTrackerConfigs.SUPERPOINT
     tracker_config["num_features"] = num_features
 
     feature_tracker = feature_tracker_factory(**tracker_config)
@@ -164,6 +164,41 @@ if __name__ == "__main__":
         if img is not None:
 
             vo.track(img, img_right, depth, img_id, timestamp)  # main VO function
+
+            # --- extract last estimated pose (x,y,z,qx,qy,qz,qw) if available ---
+            if hasattr(vo, "poses") and len(vo.poses) > 0:
+                pose = vo.poses[-1]
+                if pose is not None:
+                    # support 4x4 or 3x4 homogeneous pose
+                    if pose.shape == (4, 4):
+                        R = pose[:3, :3]
+                        t = pose[:3, 3].ravel()
+                    else:
+                        R = pose[:3, :3]
+                        t = pose[:3, 3].ravel()
+                    qx, qy, qz, qw = rotmat2qvec(R)
+                    # print: x y z qx qy qz qw
+                    # with open("/home/nastia/inz/pyslam/data/videos/kitti00/predicted_tum.txt", "a") as f:
+                    with open("/home/nastia/datasets/rosbags/barka/20251130_1/predicted_tum.txt", "a") as f:
+                        f.write(f"{timestamp:.6f} {t[0]:.6f} {t[1]:.6f} {t[2]:.6f} {qx:.6f} {qy:.6f} {qz:.6f} {qw:.6f}\n")
+            # --- end pose extraction ---
+
+            # --- write full T matrix to a txt file ---
+            if hasattr(vo, "poses") and len(vo.poses) > 0:
+                pose = vo.poses[-1]
+                if pose is not None:
+                    # Ensure 4x4 homogeneous matrix
+                    if pose.shape == (3, 4):
+                        T_i = np.vstack([pose, np.array([[0, 0, 0, 1]])])
+                    else:
+                        T_i = pose
+
+                    # Write T_i to file (one line per matrix, space-separated, row-major)
+                    with open("/home/nastia/datasets/rosbags/barka/20251130_1/predicted_t_matrix.txt", "a") as f:
+                        f.write(f"{timestamp:.6f} ")
+                        f.write(" ".join([f"{v:.8f}" for v in T_i.flatten()]))
+                        f.write("\n")
+            # --- end T matrix write ---
 
             if (
                 len(vo.traj3d_est) > 1

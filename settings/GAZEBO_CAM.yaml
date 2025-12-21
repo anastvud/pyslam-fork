@@ -1,7 +1,6 @@
 #--------------------------------------------------------------------------------------------
 # Viewer Parameters
 #--------------------------------------------------------------------------------------------
-# Viewer.on: 1 is ON, 0 is OFF
 Viewer.on: 1
 
 Viewer.KeyFrameSize: 0.6
@@ -19,25 +18,25 @@ Viewer.ViewpointF: 2000
 # Camera Parameters. Adjust them!
 #--------------------------------------------------------------------------------------------
 
-# Camera calibration and distortion parameters (OpenCV) 
-Camera.fx: 721.5377
-Camera.fy: 721.5377
-Camera.cx: 609.5593
-Camera.cy: 172.854
+# Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 762.7223205566406
+Camera.fy: 762.7223110198975
+Camera.cx: 640.0
+Camera.cy: 360.0
 
 Camera.k1: 0.0
 Camera.k2: 0.0
 Camera.p1: 0.0
 Camera.p2: 0.0
 
-Camera.width: 1241
-Camera.height: 376
+Camera.width: 1280
+Camera.height: 720
 
-# Camera frames per second 
+# Camera frames per second
 Camera.fps: 10.0
 
-# stereo baseline times fx
-Camera.bf: 387.5744
+# stereo baseline times fx (adjust if stereo baseline known)
+Camera.bf: 0.0
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -62,3 +61,4 @@ FeatureTrackerConfig.nFeatures: 2000
 #--------------------------------------------------------------------------------------------
 # KeyFrame.useFovCentersBasedGeneration: 1  # compute 3D fov centers of camera frames by using median depth and use their distances to control keyframe generation
 # KeyFrame.maxFovCentersDistance: 0.1       # max distance between fov centers in order to generate a keyframe
+
