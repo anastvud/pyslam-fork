@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # select your tracker configuration (see the file feature_tracker_configs.py)
     # LK_SHI_TOMASI, LK_FAST
     # SHI_TOMASI_ORB, FAST_ORB, ORB, BRISK, AKAZE, FAST_FREAK, SIFT, ROOT_SIFT, SURF, SUPERPOINT, LIGHTGLUE, XFEAT, XFEAT_XFEAT, LOFTR
-    tracker_config = FeatureTrackerConfigs.SUPERPOINT
+    tracker_config = FeatureTrackerConfigs.ORB
     tracker_config["num_features"] = num_features
 
     feature_tracker = feature_tracker_factory(**tracker_config)
@@ -178,8 +178,8 @@ if __name__ == "__main__":
                         t = pose[:3, 3].ravel()
                     qx, qy, qz, qw = rotmat2qvec(R)
                     # print: x y z qx qy qz qw
-                    # with open("/home/nastia/inz/pyslam/data/videos/kitti00/predicted_tum.txt", "a") as f:
-                    with open("/home/nastia/datasets/rosbags/barka/20251130_1/predicted_tum.txt", "a") as f:
+                    # with open("data/sim_rotated_imu/predicted_tum.txt", "a") as f:
+                    with open("data/20251130_1/predicted_tum.txt", "a") as f:
                         f.write(f"{timestamp:.6f} {t[0]:.6f} {t[1]:.6f} {t[2]:.6f} {qx:.6f} {qy:.6f} {qz:.6f} {qw:.6f}\n")
             # --- end pose extraction ---
 
@@ -194,7 +194,8 @@ if __name__ == "__main__":
                         T_i = pose
 
                     # Write T_i to file (one line per matrix, space-separated, row-major)
-                    with open("/home/nastia/datasets/rosbags/barka/20251130_1/predicted_t_matrix.txt", "a") as f:
+                    # with open("data/sim_rotated_imu/predicted_tum.txt", "a") as f:
+                    with open("data/20251130_1/predicted_t_matrix.txt", "a") as f:
                         f.write(f"{timestamp:.6f} ")
                         f.write(" ".join([f"{v:.8f}" for v in T_i.flatten()]))
                         f.write("\n")

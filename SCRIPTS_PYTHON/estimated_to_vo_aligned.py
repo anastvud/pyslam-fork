@@ -16,8 +16,8 @@ def transform_tum_trajectory():
     # Scale Factor (s_align)
     s_align = 2.183457177130708
 
-    input_file = "/home/nastia/datasets/rosbags/barka/20251130_1/orb_predicted_tum.txt"
-    output_file = "/home/nastia/datasets/rosbags/barka/20251130_1/tum_aligned_as_in_evo.txt"
+    input_file = "/data/20251130_1/orb_predicted_tum.txt"
+    output_file = "data/20251130_1/tum_aligned_as_in_evo.txt"
 
     print(f"Reading from {input_file}...")
     

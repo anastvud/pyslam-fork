@@ -1,9 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-gt_path = "/home/nastia/datasets/rosbags/barka/20251130_1/gt_tum.txt"
-pred_path = "/home/nastia/datasets/rosbags/barka/20251130_1/orb_predicted_tum.txt"
-rotated_path = "/home/nastia/datasets/rosbags/barka/20251130_1/tum_aligned_as_in_evo.txt"
+gt_path = "data/20251130_1/gt_tum.txt"
+pred_path = "data/20251130_1/orb_predicted_tum.txt"
+rotated_path = "data/20251130_1/tum_aligned_as_in_evo.txt"
 
 cols = ["t","x","y","z","qx","qy","qz","qw"]
 

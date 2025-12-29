@@ -20,7 +20,7 @@ DATASET:
 BARKA_DATASET:
   type: folder 
   sensor_type: mono   # Here, 'sensor_type' can be only 'mono' 
-  base_path: /home/nastia/datasets/rosbags/barka/20251130_1/images
+  base_path: /data/barka/20251130_1/images
   # 'name' is used for specifying a glob pattern, e.g. *png, *jpeg, etc...
   name: '*png'  
   settings: settings/ZED.yaml
@@ -31,7 +31,7 @@ BARKA_DATASET:
 SIM_DATASET:
   type: folder 
   sensor_type: mono   # Here, 'sensor_type' can be only 'mono' 
-  base_path: /home/nastia/datasets/rosbags/sim_teleop/images
+  base_path: /data/sim_rotated_imu/images
   # 'name' is used for specifying a glob pattern, e.g. *png, *jpeg, etc...
   name: '*png'  
   settings: settings/GAZEBO_CAM.yaml
@@ -50,7 +50,7 @@ KITTI_DATASET:
   # name: '06'
   # settings: settings/KITTI04-12.yaml # do not forget to correctly set the corresponding camera settings file 
   #
-  name: '00'
+  name: '01'
   settings: settings/KITTI00-02.yaml # do not forget to correctly set the corresponding camera settings file 
   #
   is_color: False # do you have the color images for the kitti dataset? (image2 and image3 folders)

@@ -120,7 +120,7 @@ def merge(gps, imu):
     # ry = gz
     # rz = gx
 
-    out = np.column_stack([ts, -gy, -gx, gz, imu[:, 1:]])
+    out = np.column_stack([ts, gx, gy, gz, imu[:, 1:]])
     return out
 
 
@@ -288,9 +288,9 @@ BARKA_TOPICS = {
 def main():
 
     # BARKA
-    dir = "/home/nastia/datasets/rosbags/barka/20251130_3/"
+    dir = "data/20251130_1/"
 
-    bag_path = dir + "20251130_3.db3"
+    bag_path = dir + "20251130_1.db3"
     bag = RosbagReader(bag_path)
 
     gps = extract_gps(bag, BARKA_TOPICS["gps"])
@@ -301,17 +301,9 @@ def main():
 
     timestamps = extract_images_and_timestamps(bag, BARKA_TOPICS["images"], dir + "images")
     np.savetxt(dir + "groundtruth_pyslam.txt", aligned, fmt="%.6f")
+    np.savetxt(dir + "images/groundtruth_pyslam.txt", aligned, fmt="%.6f")
     np.savetxt(dir + "timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
-    # drop_n_records(
-    #     dir + "groundtruth_pyslam.txt",
-    #     dir + "timestamps.txt",
-    #     34
-    # )
-    # drop_every_second_images_and_records(
-    #     dir + "images",
-    #     dir + "timestamps.txt",
-    #     dir + "groundtruth_pyslam.txt"
-    # )
+    np.savetxt(dir + "images/timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
     gt_tum(
         dir + "timestamps.txt",
         dir + "groundtruth_pyslam.txt",
@@ -319,9 +311,9 @@ def main():
     )
 
     # SIM
-    # dir = "/home/nastia/datasets/rosbags/sim_teleop/"
+    # dir = "data/sim_rotated_imu/"
 
-    # bag_path = dir + "sim_teleop_0.db3"
+    # bag_path = dir + "sim_rotated_imu_0.db3"
     # bag = RosbagReader(bag_path)
 
     # gps = extract_gps(bag, SIM_TOPICS["gps"])
@@ -332,12 +324,9 @@ def main():
 
     # timestamps = extract_images_and_timestamps(bag, SIM_TOPICS["images"], dir + "images")
     # np.savetxt(dir + "groundtruth_pyslam.txt", aligned, fmt="%.6f")
+    # np.savetxt(dir + "images/groundtruth_pyslam.txt", aligned, fmt="%.6f")
     # np.savetxt(dir + "timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
-    # drop_every_second_images_and_records(
-    #     dir + "images",
-    #     dir + "timestamps.txt",
-    #     dir + "groundtruth_pyslam.txt"
-    # )
+    # np.savetxt(dir + "images/timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
     # gt_tum(
     #     dir + "timestamps.txt",
     #     dir + "groundtruth_pyslam.txt",
