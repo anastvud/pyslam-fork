@@ -41,10 +41,10 @@ kVerbose = False
 class SuperPointOptions:
     def __init__(self, do_cuda=True):
         # default options from demo_superpoints
-        self.weights_path = config.cfg.root_folder + "/thirdparty/superpoint/superpoint_v1.pth"
+        self.weights_path = config.cfg.root_folder + "/thirdparty/superpoint/PTH_n580gd_superPointNet_200000_checkpoint_loss1.pth"
         print(f"SuperPoint weights: {self.weights_path}")
-        self.nms_dist = 3
-        self.conf_thresh = 0.015
+        self.nms_dist = 4
+        self.conf_thresh = 0.005
         self.nn_thresh = 0.7
 
         use_cuda = torch.cuda.is_available() and do_cuda
