@@ -1,9 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-gt_path = "data/20251130_1/gt_tum.txt"
-pred_path = "data/20251130_1/orb_predicted_tum.txt"
-rotated_path = "data/20251130_1/tum_aligned_as_in_evo.txt"
+gt_path = "/home/nastia/datasets/rosbags/sim_longer/gt_tum.txt"
+pred_path = "/home/nastia/datasets/rosbags/sim_longer/aligned_orb.txt"
+rotated_path = "/home/nastia/datasets/rosbags/sim_longer/aligned_superpoint.txt"
 
 cols = ["t","x","y","z","qx","qy","qz","qw"]
 
@@ -38,8 +38,8 @@ axs[0, 0].set_ylabel("y")
 axs[0, 0].set_title("XY")
 
 axs[1, 0].plot(gtx, gtz)
-axs[1, 0].plot(-prz, -prx)
-axs[1, 0].plot(rtx, rtz)
+axs[1, 0].plot(prz, rtx)
+axs[1, 0].plot(rtz, rtx)
 axs[1, 0].set_xlabel("x")
 axs[1, 0].set_ylabel("z")
 axs[1, 0].set_title("XZ")
@@ -52,13 +52,13 @@ axs[0, 1].set_ylabel("z")
 axs[0, 1].set_title("YZ")
 
 axs[1, 1].plot(gty, gtz)
-axs[1, 1].plot(-prz, -prx)
-axs[1, 1].plot(-rtz, -rtx)
+axs[1, 1].plot(prz, rtx)
+axs[1, 1].plot(rtz, rtx)
 axs[1, 1].set_xlabel("x")
 axs[1, 1].set_ylabel("z")
 
 
-axs[1, 1].legend(["groundtruth", "estimated", "aligned"])
+axs[1, 1].legend(["groundtruth", "aligned_orb", "aligned_superpoint"])
 
 plt.tight_layout()
 plt.show()
