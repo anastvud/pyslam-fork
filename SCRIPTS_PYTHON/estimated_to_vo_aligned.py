@@ -5,19 +5,19 @@ def transform_tum_trajectory():
     # --- 1. Define the Alignment Parameters ---
     # Rotation Matrix (R_align)
     R_align = np.array([
-        [ 0.14783384, -0.76998699, -0.62069734],
-        [ 0.94948702, -0.06515419,  0.30696796],
-        [-0.27680237, -0.63472432,  0.72146066]
+        [ 0.0645418,   0.9926181,   0.10268232],
+        [ -0.54316278,  0.12126285, -0.8308246],
+        [-0.83714309, -0.0021503,   0.54697973]
     ])
     
     # Translation Vector (t_align)
-    t_align = np.array([28.39438401, 3.96675942, 0.65894437])
+    t_align = np.array([-3.75798883, 54.19582125, 53.80205241])
     
     # Scale Factor (s_align)
-    s_align = 2.183457177130708
+    s_align = 0.6170867230950102
 
-    input_file = "/data/20251130_1/orb_predicted_tum.txt"
-    output_file = "data/20251130_1/tum_aligned_as_in_evo.txt"
+    input_file = "/home/nastia/datasets/kitti/sequences/01/orb_predicted_tum.txt"
+    output_file = "/home/nastia/datasets/kitti/sequences/01/aligned_orb_tum.txt"
 
     print(f"Reading from {input_file}...")
     
@@ -78,6 +78,7 @@ def transform_tum_trajectory():
         T0_inv[:3, 3] = -R0.T @ p0
 
         final_lines = []
+        first_pos = None
         
         for pose in aligned_poses:
             # Construct Ti (Current Pose Matrix)
@@ -94,6 +95,13 @@ def transform_tum_trajectory():
             # Extract final Position and Quaternion
             pos_final = T_final[:3, 3]
             quat_final = Rot.from_matrix(T_final[:3, :3]).as_quat() # Normalized automatically
+            
+            # Store first position to translate all positions to start from origin
+            if first_pos is None:
+                first_pos = pos_final.copy()
+            
+            # Translate all positions so that the first position is at origin (0, 0, 0)
+            pos_final = pos_final - first_pos
             
             # Format output line
             new_line = (
