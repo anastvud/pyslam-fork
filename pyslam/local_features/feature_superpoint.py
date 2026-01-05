@@ -43,9 +43,9 @@ class SuperPointOptions:
         # default options from demo_superpoints
         self.weights_path = config.cfg.root_folder + "/thirdparty/superpoint/PTH_n580gd_superPointNet_200000_checkpoint_loss1.pth"
         print(f"SuperPoint weights: {self.weights_path}")
-        self.nms_dist = 4
-        self.conf_thresh = 0.005
-        self.nn_thresh = 0.7
+        self.nms_dist = 5
+        self.conf_thresh = 0.003
+        self.nn_thresh = 0.65
 
         use_cuda = torch.cuda.is_available() and do_cuda
         device = torch.device("cuda" if use_cuda else "cpu")

@@ -144,7 +144,7 @@ if False:
 # Init Feature Tracker
 # ============================================
 
-num_features = 2000
+num_features = 4000
 
 tracker_type = None
 # Force a tracker type if you prefer. First, you need to check if that's possible though.
@@ -155,7 +155,7 @@ tracker_type = None
 
 # Select your tracker configuration (see the file feature_tracker_configs.py). Some examples:
 # FeatureTrackerConfigs: SHI_TOMASI_ORB, FAST_ORB, ORB, ORB2, ORB2_FREAK, ORB2_BEBLID, BRISK, AKAZE, FAST_FREAK, SIFT, ROOT_SIFT, SURF, SUPERPOINT, CONTEXTDESC, LIGHTGLUE, XFEAT_XFEAT, LOFTR, DISK, ALIKED, KEYNETAFFNETHARDNET, XFEAT, XFEAT_XFEAT, ...
-tracker_config = FeatureTrackerConfigs.ORB
+tracker_config = FeatureTrackerConfigs.SUPERPOINT
 tracker_config["num_features"] = num_features
 # tracker_config['match_ratio_test'] = 0.7        # 0.7 is the default in feature_tracker_configs.py
 if tracker_type is not None:

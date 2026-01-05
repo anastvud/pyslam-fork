@@ -31,8 +31,8 @@ from pyslam.utilities.utils_sys import Printer
 kNumFeatures = Parameters.kNumFeatures
 kDefaultRatioTest = Parameters.kFeatureMatchDefaultRatioTest
 
-kTrackerType = FeatureTrackerTypes.DES_BF  # default descriptor-based, brute force matching with knn
-# kTrackerType = FeatureTrackerTypes.DES_FLANN  # default descriptor-based, FLANN-based matching
+# kTrackerType = FeatureTrackerTypes.DES_BF  # default descriptor-based, brute force matching with knn
+kTrackerType = FeatureTrackerTypes.DES_FLANN  # default descriptor-based, FLANN-based matching
 
 
 """

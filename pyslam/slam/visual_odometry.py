@@ -43,7 +43,7 @@ kUseEssentialMatrixEstimation = True  # using the essential matrix fitting algor
 kRansacProb = 0.999  # (originally 0.999)
 kMinAveragePixelShiftForMotionEstimation = 1.5  # if the average pixel shift is below this threshold, motion is considered to be small enough to be ignored
 
-kUseGroundTruthScale = False
+kUseGroundTruthScale = True
 kAbsoluteScaleThresholdKitti = 0.1  # absolute translation scale; it is also the minimum translation norm for an accepted motion
 kAbsoluteScaleThresholdIndoor = 0.015  # absolute translation scale; it is also the minimum translation norm for an accepted motion
 
