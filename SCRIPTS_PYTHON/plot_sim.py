@@ -74,7 +74,7 @@ if p4z is not None:
 axs[1, 1].set_xlabel("x")
 axs[1, 1].set_ylabel("z")
 
-labels = ["groundtruth", "estimated", "aligned"]
+labels = ["groundtruth", "aligned_superpoint", "aligned_orb", "aligned_finetuned"]
 if p4x is not None:
     labels.append("path4")
 axs[1, 1].legend(labels)
@@ -87,28 +87,28 @@ fig = plt.figure(figsize=(12, 5))
 
 ax1 = fig.add_subplot(121, projection='3d')
 ax1.plot(gtz, gtx, gty, label='groundtruth', linewidth=2)
-ax1.plot(prx, pry, prz, label='estimated', linewidth=2)
-ax1.plot(rtx, rty, rtz, label='aligned', linewidth=2)
+ax1.plot(prx, pry, prz, label='aligned_superpoint', linewidth=2)
+ax1.plot(rtx, rty, rtz, label='aligned_orb', linewidth=2)
 if p4x is not None:
-    ax1.plot(p4x, p4y, p4z, label='path4', linewidth=2)
+    ax1.plot(p4x, p4y, p4z, label='aligned_finetuned', linewidth=2)
 ax1.set_xlabel('x')
 ax1.set_ylabel('y')
 ax1.set_zlabel('z')
-ax1.set_title('3D Trajectories')
+ax1.set_title('3D SIM')
 ax1.legend()
 ax1.grid(True)
 
 # Another 3D view with different rotation
 ax2 = fig.add_subplot(122, projection='3d')
 ax2.plot(gtz, gtx, gty, label='groundtruth', linewidth=2)
-ax2.plot(prx, pry, prz, label='estimated', linewidth=2)
-ax2.plot(rtx, rty, rtz, label='aligned', linewidth=2)
+ax2.plot(prx, pry, prz, label='aligned_superpoint', linewidth=2)
+ax2.plot(rtx, rty, rtz, label='aligned_orb', linewidth=2)
 if p4x is not None:
-    ax2.plot(p4x, p4y, p4z, label='path4', linewidth=2)
+    ax2.plot(p4x, p4y, p4z, label='aligned_finetuned', linewidth=2)
 ax2.set_xlabel('x')
 ax2.set_ylabel('y')
 ax2.set_zlabel('z')
-ax2.set_title('3D Trajectories (Different View)')
+ax2.set_title('3D SIM')
 ax2.view_init(elev=0, azim=90)
 ax2.legend()
 ax2.grid(True)
