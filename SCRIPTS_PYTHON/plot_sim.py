@@ -20,9 +20,9 @@ rt.columns = cols
 if p4 is not None:
     p4.columns = cols
 
-gtx = gt["x"].to_numpy()
-gty = gt["y"].to_numpy()
-gtz = gt["z"].to_numpy()
+gtx = gt["z"].to_numpy()
+gty = gt["x"].to_numpy()
+gtz = gt["y"].to_numpy()
 
 prx = pr["x"].to_numpy()
 pry = pr["y"].to_numpy()
@@ -66,11 +66,11 @@ axs[0, 1].set_xlabel("y")
 axs[0, 1].set_ylabel("z")
 axs[0, 1].set_title("YZ")
 
-axs[1, 1].plot(-gty, -gtz)
-axs[1, 1].plot(-prz, -prx)
-axs[1, 1].plot(-rtz, -rtx)
+axs[1, 1].plot(gty, gtz)
+axs[1, 1].plot(prz, prx)
+axs[1, 1].plot(rtz, rtx)
 if p4z is not None:
-    axs[1, 1].plot(-p4z, -p4x)
+    axs[1, 1].plot(p4z, p4x)
 axs[1, 1].set_xlabel("x")
 axs[1, 1].set_ylabel("z")
 
@@ -86,7 +86,7 @@ plt.show()
 fig = plt.figure(figsize=(12, 5))
 
 ax1 = fig.add_subplot(121, projection='3d')
-ax1.plot(gtz, gtx, gty, label='groundtruth', linewidth=2)
+ax1.plot(gtx, gty, gtz, label='groundtruth', linewidth=2)
 ax1.plot(prx, pry, prz, label='aligned_superpoint', linewidth=2)
 ax1.plot(rtx, rty, rtz, label='aligned_orb', linewidth=2)
 if p4x is not None:
@@ -100,7 +100,7 @@ ax1.grid(True)
 
 # Another 3D view with different rotation
 ax2 = fig.add_subplot(122, projection='3d')
-ax2.plot(gtz, gtx, gty, label='groundtruth', linewidth=2)
+ax2.plot(gtx, gty, gtz, label='groundtruth', linewidth=2)
 ax2.plot(prx, pry, prz, label='aligned_superpoint', linewidth=2)
 ax2.plot(rtx, rty, rtz, label='aligned_orb', linewidth=2)
 if p4x is not None:
