@@ -274,7 +274,7 @@ def drop_n_records(gt_path, timestamps_path, n):
 
 SIM_TOPICS = {
     "gps": "/wamv/sensors/gps/gps/fix",
-    "imu": "/wamv/sensors/imu/imu/data",
+    "imu": "/wamv/sensors/imu/imu/data_rotated",
     "images": "/wamv/sensors/cameras/front_right_camera_sensor/image_raw"
 }
 
@@ -288,30 +288,30 @@ BARKA_TOPICS = {
 def main():
 
     # BARKA
-    # dir = "data/20251130_1/"
+    dir = "/home/nastia/datasets/rosbags/barka/20251130_3/"
 
-    # bag_path = dir + "20251130_1.db3"
-    # bag = RosbagReader(bag_path)
+    bag_path = dir + "20251130_3.db3"
+    bag = RosbagReader(bag_path)
 
-    # gps = extract_gps(bag, BARKA_TOPICS["gps"])
-    # imu = extract_imu(bag, BARKA_TOPICS["imu"])
-    # img_ts = extract_image_timestamps(bag, BARKA_TOPICS["images"])
-    # gt = merge(gps, imu)
-    # aligned = match_to_images(gt, img_ts)
+    gps = extract_gps(bag, BARKA_TOPICS["gps"])
+    imu = extract_imu(bag, BARKA_TOPICS["imu"])
+    img_ts = extract_image_timestamps(bag, BARKA_TOPICS["images"])
+    gt = merge(gps, imu)
+    aligned = match_to_images(gt, img_ts)
 
-    # timestamps = extract_images_and_timestamps(bag, BARKA_TOPICS["images"], dir + "images")
-    # np.savetxt(dir + "groundtruth_pyslam.txt", aligned, fmt="%.6f")
-    # np.savetxt(dir + "images/groundtruth_pyslam.txt", aligned, fmt="%.6f")
-    # np.savetxt(dir + "timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
-    # np.savetxt(dir + "images/timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
-    # gt_tum(
-    #     dir + "timestamps.txt",
-    #     dir + "groundtruth_pyslam.txt",
-    #     dir + "gt_tum.txt"
-    # )
+    timestamps = extract_images_and_timestamps(bag, BARKA_TOPICS["images"], dir + "images")
+    np.savetxt(dir + "groundtruth_pyslam.txt", aligned, fmt="%.6f")
+    np.savetxt(dir + "images/groundtruth_pyslam.txt", aligned, fmt="%.6f")
+    np.savetxt(dir + "timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
+    np.savetxt(dir + "images/timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
+    gt_tum(
+        dir + "timestamps.txt",
+        dir + "groundtruth_pyslam.txt",
+        dir + "gt_tum.txt"
+    )
 
     # SIM
-    dir = "/home/nastia/datasets/rosbags/sim_longer/"
+    # dir = "/home/nastia/datasets/rosbags/sim_longer/"
 
     # bag_path = dir + "sim_longer_0.db3"
     # bag = RosbagReader(bag_path)
@@ -323,7 +323,6 @@ def main():
     # aligned = match_to_images(gt, img_ts)
 
     # timestamps = extract_images_and_timestamps(bag, SIM_TOPICS["images"], dir + "images")
-
 
     # np.savetxt(dir + "images/groundtruth_pyslam.txt", aligned, fmt="%.6f")
     # np.savetxt(dir + "images/timestamps.txt", np.array(timestamps).reshape(-1, 1), fmt="%.6f")
@@ -337,11 +336,11 @@ def main():
     
 
 
-    gt_tum(
-        dir + "timestamps.txt",
-        dir + "groundtruth_pyslam.txt",
-        dir + "gt_tum.txt"
-    )
+    # gt_tum(
+    #     dir + "images/timestamps.txt",
+    #     dir + "images/groundtruth_pyslam.txt",
+    #     dir + "gt_tum.txt"
+    # )
 
     
 
