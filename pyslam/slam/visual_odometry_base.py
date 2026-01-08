@@ -157,6 +157,14 @@ class VisualOdometryBase:
             # pg = [self.gt_x-self.t0_gt[0], self.gt_y-self.t0_gt[1], self.gt_z-self.t0_gt[2]]  # the groudtruth traj starts at 0
             gt_T = self.T0_inv_gt @ self.gt_T
             pg = gt_T[:3, 3].ravel()
+
+
+            # change axis to have the same convention as VO (z forward, x right, y down)
+            temp = pg.copy()
+            pg[0] = temp[1]
+            pg[1] = -temp[2]
+            pg[2] = temp[0]
+
             self.traj3d_gt.append(pg)
 
             self.poses.append(poseRt(self.cur_R, np.array(p).ravel()))

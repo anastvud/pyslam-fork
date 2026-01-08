@@ -5,19 +5,19 @@ def transform_tum_trajectory():
     # --- 1. Define the Alignment Parameters ---
     # Rotation Matrix (R_align)
     R_align = np.array([
-        [ 0.62401929,  0.74910895,  0.22234142],
-        [-0.11412376, -0.19411814,  0.97431715],
-        [ 0.7730302,  -0.63336714, -0.03564234]
+        [ 0.89037074,  0.29086468, -0.35019663],
+        [-0.42407105,  0.25020787, -0.87037909],
+        [-0.16554058,  0.92346833,  0.34612506]
     ])
     
     # Translation Vector (t_align)
-    t_align = np.array([ 12.33615507,  13.61418323, -19.90166157])
+    t_align = np.array([19.16248869,  5.1213747,   0.88495221])
     
     # Scale Factor (s_align)
-    s_align = 1.8719795200466263
+    s_align = 2.85
 
-    input_file = "/home/nastia/datasets/rosbags/sim_longer/superpoint_predicted_tum_1.txt"
-    output_file = "/home/nastia/datasets/rosbags/sim_longer/aligned_superpoint.txt"
+    input_file = "/home/nastia/datasets/rosbags/barka/20251130_3/orb_predicted_tum.txt"
+    output_file = "/home/nastia/datasets/rosbags/barka/20251130_3/aligned_orb_scale_smaller.txt"
 
     print(f"Reading from {input_file}...")
     
